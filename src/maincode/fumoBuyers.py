@@ -25,8 +25,20 @@ def PurchaseMsg():
 
 def returnGoods():
     """
-    负责用户随机的退货行为
+    负责用户的退货行为
     """
+
+def ratingStar():
+    """
+    负责用户的评星行为
+    """
+
+def customernames():
+    """
+    负责随机选取用户姓名
+    """
+
+    pass
 
 if __name__ == "__main__":
     main()

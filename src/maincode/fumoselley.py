@@ -1,12 +1,26 @@
 import os
 from posixpath import split
-import tkinter
 import re
 import linecache
 
 """
 
-此文件负责
+//_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+//                                                                                                                       
+//                                     欢迎进入源代码页面！━(*｀∀´*)ノ亻!                                                                                      
+//                                                                                                                       
+//                                      项目：FUMOEUSHOP                                                                                  
+//                                      版本：alpha v.0.0.0                                                                         
+//                                      开发者：WUTONK                                                                            
+//                                      开始日期：2021-12-13   
+//                                      最后编辑日期：2021-12-31
+//                                      本页面功能：主页以及游戏逻辑运行                                                                              
+//                                                                                                                                                                                                           
+//                                                      ┌      ┐ 
+//												          ' 」'      welcome to the code                                                 
+//                                                      └  ︶  ┘                                     
+//                                                                                
+//_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
 
 """
 
@@ -35,90 +49,113 @@ class mainclass(object):
                 fumoshop.shopinit()
             if swithView == '2':
                 self.fumoWarehouse(fumosave_type=3,fumoname="我超恶俗啊",fumonum = 90)
+    
+    class saves():
+        
+        #fumo仓库函数，负责存储fumo列表和添加删除功能
+        def fumoWarehouse(self,fumosave_type,fumoname,fumonum):
 
-    #fumo仓库函数，负责存储fumo列表和添加删除功能
-    def fumoWarehouse(self,fumosave_type,fumoname,fumonum):
+            print("_______________页面02（fumoWarehouse）,调试信息：")
+            #读取文件
+            with open("./myfumolist", "r+") as fumosave_file:
+                fumos_data = fumosave_file.read()
+                fumos_list = fumos_data.split("\n")
+                print("文件读取完毕")
+                print(fumos_list)
 
-        print("_______________页面02（fumoWarehouse）,调试信息：")
-        #读取文件
-        with open("./myfumolist", "r+") as fumosave_file:
-            fumos_data = fumosave_file.read()
-            fumos_list = fumos_data.split("\n")
-            print("文件读取完毕")
-            print(fumos_list)
+                #存储模式
+                if fumosave_type == 1:
+                    print("打开了存储模式")
 
-            #存储模式
-            if fumosave_type == 1:
-                print("打开了存储模式")
+                    for fumos in fumos_list:
+                        if fumos == fumoname:
+                            # 获得对应fumo在列表中的索引
+                            index = fumos_list.index(fumoname)
+                            print("这个fumo已经在仓库里了！索引为：",index)
+                            return 
+                    else:  
+                        with open("./myfumolist", "a") as fumosave_file:
+                            print(fumoname)   
+                            fumosave_file.write(fumoname + "\n" + "x" + str(fumonum) + "\n" )
+                            fumosave_file.close()
 
-                for fumos in fumos_list:
-                    if fumos == fumoname:
-                        # 获得对应fumo在列表中的索引
-                        index = fumos_list.index(fumoname)
-                        print("这个fumo已经在仓库里了！索引为：",index)
-                        return 
-                else:  
-                    with open("./myfumolist", "a") as fumosave_file:
-                        print(fumoname)   
-                        fumosave_file.write(fumoname + "\n" + "x" + str(fumonum) + "\n" )
-                        fumosave_file.close()
-
-            #第一删除模式（清空仓库中的某个fumo的所有存货）
-            if fumosave_type == 2:
-                with open("./myfumolist", "w") as fumosave_file:
-                    print("打开了第一删除模式")#下一行：通过find()函数找到包含要删除内容的行数    
-                    lines = [cirno for cirno in open("myfumolist", "r") if cirno.find(fumoname) != 0]
-                    print(lines)
-                    fd = open("myfumolist", "w")
-                    fd.writelines(lines)
-                    return        
-            #第二删除模式（修改某行的fumo数量）
-            if fumosave_type == 3:
-                with open("./myfumolist", "r") as fumosave_file:
-                    print("打开了第二删除模式")
-                    string = str(fumoname)
-                    
-
-                    # 开始查找fumoname行
-                    count = 0
-                    fumosave_file = open('./myfumolist', "r+")
-                    for line in fumosave_file.readlines():
-                        if string in line:
-                            print("第 "+str(count)+" 行已找到.")
-                            print("该行内容: \n"+line)
-                            break #如果已经找到了就跳出循环，不然名字部分重合就会出bug，虽然现在还是会，艹
-                        count += 1
-                        countnext = count #用来存储下一行的行数
-                    fumosave_file.close()
-
-                    fumonums = linecache.getline('./myfumolist', countnext)
-                    fumonums = fumonums.replace("x",'') #将'x'去除，不然转换不了int类型
-                    fumoname = str(line)
-                    print("fumonums:",fumonums,"fumoname:",fumoname)
-
-                    #开始计算，然后转字符串写入
-                    fumonum = int(fumonum)
-                    fumonums = int(fumonums)
-                    print(fumonum,fumonums)
-                    if fumonum >= 0:
-                        fumonums = (fumonums+fumonum) #fumonum即为外部传入的fumo数量
-                    elif fumonum <0:
-                        fumonums = (fumonums-fumonum)
-                    else:
-                        print("fumonums全局变量错误，值为：",fumonum)
-                    print()
-
-                    #写入 
+                #第一删除模式（清空仓库中的某个fumo的所有存货）
+                if fumosave_type == 2:
+                    with open("./myfumolist", "w") as fumosave_file:
+                        print("打开了第一删除模式")#下一行：通过find()函数找到包含要删除内容的行数    
+                        lines = [cirno for cirno in open("myfumolist", "r") if cirno.find(fumoname) != 0]
+                        print(lines)
+                        fd = open("myfumolist", "w")
+                        fd.writelines(lines)
+                        return        
+                #第二删除模式（修改某行的fumo数量）
+                if fumosave_type == 3:
                     with open("./myfumolist", "r") as fumosave_file:
-                        line_to_replace = countnext #选取要写入的行数
-                        lines = fumosave_file.readlines()
-                    #now we have an array of lines. If we want to edit the line 17...
-                    if len(lines) > int(line_to_replace):
-                        lines[line_to_replace] = ('x'+fumonums)
+                        print("打开了第二删除模式")
+                        string = str(fumoname)
+                        
 
-                    with open("./myfumolist",'w') as fumosave_file:
-                        fumosave_file.writelines(lines)
+                        # 开始查找fumoname行
+                        count = 0
+                        fumosave_file = open('./myfumolist', "r+")
+                        for line in fumosave_file.readlines():
+                            if string in line:
+                                print("第 "+str(count)+" 行已找到.")
+                                print("该行内容: \n"+line)
+                                break #如果已经找到了就跳出循环，不然名字部分重合就会出bug，虽然现在还是会，艹
+                            count += 1
+                            countnext = count #用来存储下一行的行数
                         fumosave_file.close()
+
+                        fumonums = linecache.getline('./myfumolist', countnext)
+                        fumonums = fumonums.replace("x",'') #将'x'去除，不然转换不了int类型
+                        fumoname = str(line)
+                        print("fumonums:",fumonums,"fumoname:",fumoname)
+
+                        #开始计算，然后转字符串写入
+                        fumonum = int(fumonum)
+                        fumonums = int(fumonums)
+                        print(fumonum,fumonums)
+                        if fumonum >= 0:
+                            fumonums = (fumonums+fumonum) #fumonum即为外部传入的fumo数量
+                        elif fumonum <0:
+                            fumonums = (fumonums-fumonum)
+                        else:
+                            print("fumonums全局变量错误，值为：",fumonum)
+                        print()
+
+                        #写入 
+                        with open("./myfumolist", "r") as fumosave_file:
+                            line_to_replace = countnext #选取要写入的行数
+                            lines = fumosave_file.readlines()
+                        #now we have an array of lines. If we want to edit the line 17...
+                        if len(lines) > int(line_to_replace):
+                            lines[line_to_replace] = ('x'+fumonums)
+
+                        with open("./myfumolist",'w') as fumosave_file:
+                            fumosave_file.writelines(lines)
+                            fumosave_file.close()
+
+        #普通存档功能
+        def playersave_1(money,shopStars,reown):
+            pass
+        
+        #存档备份功能
+        def playersave_2(money,shopStars,reown):
+            pass
+
+        #存档删除功能
+        def playersave_3(money,shopStars,reown):
+            pass
+
+        #新建存档功能
+        def playersave_4(money,shopStars,reown):
+            pass
+        
+        #存档调试功能（开发者用）
+        def playersave_5(money,shopStars,reown):
+            pass
+
 
 class mainView:
     def __init__(self) :
