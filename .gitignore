@@ -112,3 +112,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# 排除所有.DS_Store文件:
+.DS_Store
+
