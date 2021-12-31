@@ -5,7 +5,7 @@ import linecache
 
 """
 
-//_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+//_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
 //                                                                                                                       
 //                                     欢迎进入源代码页面！━(*｀∀´*)ノ亻!                                                                                      
 //                                                                                                                       
@@ -20,7 +20,7 @@ import linecache
 //												          ' 」'      welcome to the code                                                 
 //                                                      └  ︶  ┘                                     
 //                                                                                
-//_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+//_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
 
 """
 
@@ -48,12 +48,16 @@ class mainclass(object):
             if swithView == '1':
                 fumoshop.shopinit()
             if swithView == '2':
-                self.fumoWarehouse(fumosave_type=3,fumoname="我超恶俗啊",fumonum = 90)
+                self.saves.fumoWarehouse(fumosave_type=3,fumoname="流汗黄豆",fumonum = 90)
     
     class saves():
         
         #fumo仓库函数，负责存储fumo列表和添加删除功能
-        def fumoWarehouse(self,fumosave_type,fumoname,fumonum):
+        def fumoWarehouse(fumosave_type,fumoname,fumonum):
+            
+            def __init__():
+                pass
+
 
             print("_______________页面02（fumoWarehouse）,调试信息：")
             #读取文件
@@ -94,9 +98,9 @@ class mainclass(object):
                         print("打开了第二删除模式")
                         string = str(fumoname)
                         
-
                         # 开始查找fumoname行
                         count = 0
+                        countnext = 0
                         fumosave_file = open('./myfumolist', "r+")
                         for line in fumosave_file.readlines():
                             if string in line:
@@ -107,6 +111,7 @@ class mainclass(object):
                             countnext = count #用来存储下一行的行数
                         fumosave_file.close()
 
+                        countnext = countnext+2 #gitline不是从零开始数的，且conut是从零开始数，要获取下一行的数据得加二
                         fumonums = linecache.getline('./myfumolist', countnext)
                         fumonums = fumonums.replace("x",'') #将'x'去除，不然转换不了int类型
                         fumoname = str(line)
@@ -122,18 +127,19 @@ class mainclass(object):
                             fumonums = (fumonums-fumonum)
                         else:
                             print("fumonums全局变量错误，值为：",fumonum)
-                        print()
+                        
 
                         #写入 
                         with open("./myfumolist", "r") as fumosave_file:
-                            line_to_replace = countnext #选取要写入的行数
+                            countnext = countnext
+                            fumonums = str(fumonums)
+                            line_to_replace = countnext-1 #选取要写入的行数(由于这里又是从零开始数所以要减1)
                             lines = fumosave_file.readlines()
-                        #now we have an array of lines. If we want to edit the line 17...
                         if len(lines) > int(line_to_replace):
-                            lines[line_to_replace] = ('x'+fumonums)
-
+                            lines[line_to_replace] = ('x'+fumonums+'\n')
                         with open("./myfumolist",'w') as fumosave_file:
                             fumosave_file.writelines(lines)
+                            print(lines)
                             fumosave_file.close()
 
         #普通存档功能
