@@ -2,7 +2,7 @@ import tkinter
 import re
 import time
 import random
-
+import json
 
 def main():
     pass
@@ -16,6 +16,7 @@ class ShoppingBehavior():
         """
         负责顾客的随机购买行为
         """
+        random(1,100)
         pass
 
     def Purchase():
