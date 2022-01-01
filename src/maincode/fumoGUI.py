@@ -1,5 +1,7 @@
 import tkinter
 import re
+import json
+import PyQt6
 
 def main():
     pass

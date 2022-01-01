@@ -1,9 +1,53 @@
 {
-    "ZH_CN":{
+    "zh_cn":[{
 
-        
+        "money":"{%money}",
+        "LV":"等级{%playerLV}",
+        "playername":"{%playname}",
+        "setting":"设置",
+        "help":"帮助",
+        "profit":"利润",
+        "printProfit":"利润:{}",
+        "LVupgrade":"升级！",
+        "printRunningError":"游戏发生未知错误:{}",
+        "LackOfMoney":"金钱不足",
+        "NotUnlocked":"未解锁",
+        "printSalesVolume":"销量：{}",
+        "PrintRemainingQuantity":"剩余数量：{}",
+        "NumberOfCustomers":"顾客数：{}",
+        "EmpiricalValue":"经验值",
+        "ExitTheGame":"退出游戏",
+        "AboutAuthor":"关于作者",
+        "gameVersion":"游戏版本：{}",
+        "ptint":"图片加载异常：{}",
+        "printStartupError":"启动错误:{}",
+        "Not":"不支持此系统：{}",
+        "SystemNotSupported":"向作者反馈",
+        "ProjectWeb":"项目地址:github.com/FUMOEUSHOP",
+        "":"挂机收入：{}",
+        "":"仓库里没有这个fumo",
+        "NoviceTutorial":"新手教程",
+        "ProgramException":"程序异常!{}",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
+        "":"",
 
 
-    }
+    }]
 
 }
