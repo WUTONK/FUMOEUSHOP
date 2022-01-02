@@ -29,12 +29,16 @@ class ShoppingBehavior():
         """
         负责用户购买行为后发出的信息
         """
+
+        print("用户购买了%sx%s"%())
         pass
 
     def returnGoods():
         """
         负责用户的退货行为
         """
+
+        print("用户退货了v")
 
     def ratingStar():
         """
