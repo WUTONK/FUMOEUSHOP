@@ -4,8 +4,7 @@ import re
 import linecache
 import json
 import shutil
-from pygame import init 
-
+import shutil
 from pyparsing import withClass
 
 """
@@ -75,13 +74,15 @@ class mainclass(object):
                 #存储模式
                 if fumosave_type == 1:
                     print("打开了存储模式")
-
+                    
+                    #检测fumo是否存在
                     for fumos in fumos_list:
                         if fumos == fumoname:
                             # 获得对应fumo在列表中的索引
                             index = fumos_list.index(fumoname)
                             print("这个fumo已经在仓库里了！索引为：",index)
-                            return 
+                            return
+                    #fumo不存在的处理逻辑 
                     else:  
                         with open("./myfumolist", "a") as fumosave_file:
                             print(fumoname)   
@@ -152,25 +153,38 @@ class mainclass(object):
             pass
         
         #存档备份功能
-        def playersave_2(money,shopStars,reown):
+        def playersave_2(saveFile):
 
-            savesnum = -1
-
-            for savesnum in range(100):
-                savesnum += 1
-                savesfile = "./FUMOEUSHOP/./playrsaves/palyersave_"+str(savesnum)
-                savefiles = open(savesfile,'r')
-
+            newFilenName = saveFile+"_copy"
+            os.mkdir(newFilenName)
+            shutil.copyfile(saveFile, newFilenName)
+            "{}{}{}".format(saveFile,"已经复制到",newFilenName)
+            
+            
         #存档删除功能
-        def playersave_3(money,shopStars,reown):
-            pass
+        def playersave_3(removeSaveName):
+            os.remove(removeSaveName)
+            "{}{}{}".format("存档",removeSaveName,"已删除！")
 
         #新建存档功能
         def playersave_4(money,shopStars,reown):
-            pass
-        
+            
+            fileExistence = True
+            #查找文件是否存在
+            for savenum in range(101):
+                fileExistence = os.path.exists("./playsaves/save_"+ str(savenum))
+                if fileExistence == False:
+                    newFilenName = "./playsaves/save_"+ str(savenum+1)
+                    break
+            #新建存档文件夹
+            
+
         #存档调试功能（开发者用）
         def playersave_5(money,shopStars,reown):
+            pass
+
+        #存档损坏处理
+        def playersave_6():
             pass
 
 
