@@ -1,4 +1,3 @@
-import tkinter
 import re
 import json
 import PyQt6
@@ -6,7 +5,7 @@ import PyQt6
 def main():
     pass
 
-def xmmm():
+def Avatar():
     """
     负责玩家属性，例如头像
     """

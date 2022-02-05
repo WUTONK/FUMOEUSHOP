@@ -4,7 +4,7 @@ import re
 import linecache
 import json
 import shutil
-import shutil
+import pandas
 from pyparsing import withClass
 
 """
@@ -211,30 +211,24 @@ class fumoshop(object):
         global fumoNumNamelist
 
         #打开fumo在售列表
-        with open('./fumoshoplist', 'r', encoding='utf-8') as fumo_data:
-            fumo_data = fumo_data.read()
-        fumo_list = fumo_data.split("\n")
-        try:
-            fumo_list.remove("") #如果文件里有空格就删除
-        except:
-            pass
+        
+        fumoShopCsv = pandas.read_csv('./fumoshoplist_csv.csv')
+        fumo_namelist = list(fumoShopCsv.iloc[:, 0]) #取第一列的转为fumonamelist
+        fumo_moneylist = list(fumoShopCsv.iloc[:, 1])
 
         #计算全局变量
-        fumo_namelist = fumo_list[1::2] #从1开始，取步长为2的值，即奇数（fumo的价格在列表的位置）
-        fumo_moneylist = fumo_list[::2] #取步长为2的值，即偶数（fumo的名字在列表的位置）
         fumoNumNamelist = []#初始化
         b = 0
         a = len(fumo_namelist)
-        print(a)
         while b!=a:
-            fumoNumNamelist.append(str(b)+"."+fumo_namelist[b]+"("+fumo_moneylist[b]+")")#将索引值加上符号，名称
+            fumoNumNamelist.append(str(b)+"."+fumo_namelist[b]+"("+str(fumo_moneylist[b])+")")#将索引值加上符号，名称
             list(fumoNumNamelist)
             b = b+1
 
         #调试信息显示
         print(fumoNumNamelist)
         print("_________________页面01（shopinit）,调试信息：")
-        print(fumo_list,fumo_moneylist,fumo_namelist)
+        print(fumoShopCsv,fumo_moneylist,fumo_namelist)
         print("_________________初始化结束_________________")
 
         return #将计算出的变量返回
@@ -272,6 +266,14 @@ class fumoshop(object):
 
 class player(object):
     pass
+
+class reads(object):
+
+    def __init__(self):
+       pass
+
+    
+
 
 if __name__ == "__main__":
     main()
