@@ -3,6 +3,10 @@ from posixpath import split
 import re
 import linecache
 import json
+import shutil
+from pygame import init 
+
+from pyparsing import withClass
 
 """
 
@@ -149,7 +153,13 @@ class mainclass(object):
         
         #存档备份功能
         def playersave_2(money,shopStars,reown):
-            pass
+
+            savesnum = -1
+
+            for savesnum in range(100):
+                savesnum += 1
+                savesfile = "./FUMOEUSHOP/./playrsaves/palyersave_"+str(savesnum)
+                savefiles = open(savesfile,'r')
 
         #存档删除功能
         def playersave_3(money,shopStars,reown):
