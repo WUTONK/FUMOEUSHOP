@@ -53,7 +53,7 @@ class mainclass(object):
             if swithView == '1':
                 fumoshop.shopinit()
             if swithView == '2':
-                self.saves.fumoWarehouse(fumosave_type=2,fumoname="流汗黄豆",fumonum = 90)
+                self.saves.fumoWarehouse(fumosave_type=3,fumoname="流汗黄豆",fumonum = 90)
     
     class saves():
         
@@ -63,7 +63,8 @@ class mainclass(object):
             print("_______________页面02（fumoWarehouse）,调试信息：")
 
             #读取csv文件
-            WarehouselistScv = pandas.read_csv('./myfumolist_csv.csv')
+            WarehouselistScvFlie = './myfumolist_csv.csv'
+            WarehouselistScv = pandas.read_csv(WarehouselistScvFlie)
             WarehouseFumoList = list(WarehouselistScv.iloc[:, 0]) #读取位于name行的数据
             WarehouseFumonumList = list(WarehouselistScv.iloc[:, 1])
 
@@ -85,7 +86,7 @@ class mainclass(object):
                 else:  
                         data = {'name':[fumoname],'quantity':[fumonum]}
                         data_1 = pandas.DataFrame(data)
-                        data_1.to_csv('./myfumolist_csv.csv', mode='a',index=False, header=False) #以追加模式写入
+                        data_1.to_csv(WarehouselistScvFlie, mode='a',index=False, header=False) #以追加模式写入
                         
 
             #第一删除模式（清空仓库中的某个fumo的所有存货）
@@ -94,10 +95,9 @@ class mainclass(object):
                     if fumos == fumoname:
                         # 获得对应fumo在列表中的索引
                         del_index = WarehouseFumoList.index(fumoname)
-                        WarehouselistScv_del =WarehouselistScv.drop(0)
+                        WarehouselistScv_del =WarehouselistScv.drop(del_index) #把指定行删除，vscode不知道为啥不给drop提示
                         print(WarehouselistScv_del)
-                        WarehouselistScv_del.to_csv("./myfumolist_csv.csv",index=False,encoding="utf-8")
-
+                        WarehouselistScv_del.to_csv(WarehouselistScvFlie,index=False,encoding="utf-8")#删除后保存
                         break    
             #第二删除模式（修改某行的fumo数量）
             if fumosave_type == 3:
@@ -106,48 +106,29 @@ class mainclass(object):
                     string = str(fumoname)
                     
                     # 开始查找fumoname行
-                    count = 0
-                    countnext = 0
-                    fumosave_file = open('./myfumolist', "r+")
-                    for line in fumosave_file.readlines():
-                        if string in line:
-                            print("第 "+str(count)+" 行已找到.")
-                            print("该行内容: \n"+line)
-                            break #如果已经找到了就跳出循环，不然名字部分重合就会出bug，虽然现在还是会，艹
-                        count += 1
-                        countnext = count #用来存储下一行的行数
-                    fumosave_file.close()
+                    for fumos in WarehouseFumoList:
+                        if fumos == fumoname:
+                            # 获得对应fumo在列表中的索引
+                            index = WarehouseFumoList.index(fumoname)
 
-                    countnext = countnext+2 #gitline不是从零开始数的，且conut是从零开始数，要获取下一行的数据得加二
-                    fumonums = linecache.getline('./myfumolist', countnext)
-                    fumonums = fumonums.replace("x",'') #将'x'去除，不然转换不了int类型
-                    fumoname = str(line)
-                    print("fumonums:",fumonums,"fumoname:",fumoname)
+                    fumoQuantityNums= list(WarehouselistScv.iloc[index:, 1])[0]
+                    print(fumoQuantityNums)
 
                     #开始计算，然后转字符串写入
                     fumonum = int(fumonum)
-                    fumonums = int(fumonums)
-                    print(fumonum,fumonums)
+                    
+                    print(fumonum,fumoQuantityNums)
                     if fumonum >= 0:
-                        fumonums = (fumonums+fumonum) #fumonum即为外部传入的fumo数量
+                        fumoQuantityNums = (fumoQuantityNums+fumonum) #fumonum即为外部传入的fumo数量
                     elif fumonum <0:
-                        fumonums = (fumonums-fumonum)
+                        fumoQuantityNums = (fumoQuantityNums-fumonum)
                     else:
                         print("fumonums全局变量错误，值为：",fumonum)
                     
 
                     #写入 
-                    with open("./myfumolist", "r") as fumosave_file:
-                        countnext = countnext
-                        fumonums = str(fumonums)
-                        line_to_replace = countnext-1 #选取要写入的行数(由于这里又是从零开始数所以要减1)
-                        lines = fumosave_file.readlines()
-                    if len(lines) > int(line_to_replace):
-                        lines[line_to_replace] = ('x'+fumonums+'\n')
-                    with open("./myfumolist",'w') as fumosave_file:
-                        fumosave_file.writelines(lines)
-                        print(lines)
-                        fumosave_file.close()
+                    Warehouselist = list(pandas.DataFrame(WarehouselistScv))
+                    print(Warehouselist)
 
         #普通存档功能
         def playersave_1(money,shopStars,reown):
