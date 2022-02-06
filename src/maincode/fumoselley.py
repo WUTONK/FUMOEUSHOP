@@ -4,6 +4,7 @@ import re
 import linecache
 import json
 import shutil
+from unicodedata import name
 import pandas
 from pyparsing import withClass
 
@@ -52,7 +53,7 @@ class mainclass(object):
             if swithView == '1':
                 fumoshop.shopinit()
             if swithView == '2':
-                self.saves.fumoWarehouse(fumosave_type=3,fumoname="流汗黄豆",fumonum = 90)
+                self.saves.fumoWarehouse(fumosave_type=2,fumoname="流汗黄豆",fumonum = 90)
     
     class saves():
         
@@ -63,7 +64,8 @@ class mainclass(object):
 
             #读取csv文件
             WarehouselistScv = pandas.read_csv('./myfumolist_csv.csv')
-            WarehouseFumoList = list(WarehouselistScv.iloc[:, 0])
+            WarehouseFumoList = list(WarehouselistScv.iloc[:, 0]) #读取位于name行的数据
+            WarehouseFumonumList = list(WarehouselistScv.iloc[:, 1])
 
             print("文件读取完毕")
             print(WarehouselistScv)
@@ -78,23 +80,25 @@ class mainclass(object):
                         # 获得对应fumo在列表中的索引
                         index = WarehouseFumoList.index(fumoname)
                         print("这个fumo已经在仓库里了！索引为：",index)
-                        return
+                        break
                 #fumo不存在的处理逻辑 
                 else:  
-                    with open("./myfumolist", "a") as fumosave_file:
-                        print(fumoname)   
-                        fumosave_file.write(fumoname + "\n" + "x" + str(fumonum) + "\n" )
-                        fumosave_file.close()
+                        data = {'name':[fumoname],'quantity':[fumonum]}
+                        data_1 = pandas.DataFrame(data)
+                        data_1.to_csv('./myfumolist_csv.csv', mode='a',index=False, header=False) #以追加模式写入
+                        
 
             #第一删除模式（清空仓库中的某个fumo的所有存货）
             if fumosave_type == 2:
-                with open("./myfumolist", "w") as fumosave_file:
-                    print("打开了第一删除模式")#下一行：通过find()函数找到包含要删除内容的行数    
-                    lines = [cirno for cirno in open("myfumolist", "r") if cirno.find(fumoname) != 0]
-                    print(lines)
-                    fd = open("myfumolist", "w")
-                    fd.writelines(lines)
-                    return        
+                for fumos in WarehouseFumoList:
+                    if fumos == fumoname:
+                        # 获得对应fumo在列表中的索引
+                        del_index = WarehouseFumoList.index(fumoname)
+                        WarehouselistScv_del =WarehouselistScv.drop(0)
+                        print(WarehouselistScv_del)
+                        WarehouselistScv_del.to_csv("./myfumolist_csv.csv",index=False,encoding="utf-8")
+
+                        break    
             #第二删除模式（修改某行的fumo数量）
             if fumosave_type == 3:
                 with open("./myfumolist", "r") as fumosave_file:
@@ -257,6 +261,9 @@ class fumoshop(object):
         
 
     def subMoney():
+        """
+        金钱计算
+        """
         pass
         
     def bayfumo():
@@ -270,6 +277,40 @@ class reads(object):
     def __init__(self):
        pass
 
+class staff(object):
+    def __init__(self):
+        pass
+
+    def staffBehavior():
+        """
+        员工行为：效率，星级，满意度管理
+        """
+        pass
+
+    def personnel():
+        """
+        人事管理
+        """
+        pass
+
+    def wages():
+        """
+        员工薪酬处理
+        """
+        pass
+
+    def AutoSales():
+        """
+        员工自动销售处理
+        """
+        pass
+
+class TimeSelley(object):
+    """
+    负责与时间计算程序对接
+    """
+    def __init__(self):
+        pass
     
 
 
