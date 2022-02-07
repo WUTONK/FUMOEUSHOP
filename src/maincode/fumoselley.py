@@ -124,16 +124,18 @@ class mainclass(object):
                     
 
                     #写入 
-                    Warehouselist = WarehouselistScv.to_dict()#转列表
+                    Warehouselist = WarehouselistScv.to_dict()#转字典
                     print(Warehouselist)
-                    Warehouselist['quantity'][index] = fumoQuantityNums
-                    print(Warehouselist)
-                    Warehouselist = pandas.DataFrame(Warehouselist)
-                    Warehouselist.to_csv(WarehouselistScvFlie,index=False)
+                    Warehouselist['quantity'][index] = fumoQuantityNums #覆盖数量
+                    print("数量已经修改：",Warehouselist)
+                    Warehouselist = pandas.DataFrame(Warehouselist) #转dataFrame类型
+                    Warehouselist.to_csv(WarehouselistScvFlie,index=False) #以无索引模式写入
                     print(Warehouselist)
 
         #普通存档功能
-        def playersave_1(money,shopStars,reown):
+        def playersave_1(saveFile):
+            print("正在存储位于：",saveFile,"的存档")
+
             pass
         
         #存档备份功能
@@ -144,23 +146,25 @@ class mainclass(object):
             shutil.copyfile(saveFile, newFilenName)
             "{}{}{}".format(saveFile,"已经复制到",newFilenName)
             
-            
+
         #存档删除功能
         def playersave_3(removeSaveName):
             os.remove(removeSaveName)
             "{}{}{}".format("存档",removeSaveName,"已删除！")
 
+
         #新建存档功能
         def playersave_4(money,shopStars,reown):
             
             fileExistence = True
-            #查找文件是否存在
+            #循环查找文件名是否存在（被占用）
             for savenum in range(101):
                 fileExistence = os.path.exists("./playsaves/save_"+ str(savenum))
                 if fileExistence == False:
-                    newFilenName = "./playsaves/save_"+ str(savenum+1)
+                    newFilenName = "./playsaves/save_"+ str(savenum+1) 
                     break
-            #新建存档文件夹
+            #有空位，新建存档文件夹
+
             
 
         #存档调试功能（开发者用）
@@ -267,6 +271,12 @@ class staff(object):
     员工类
     """
     def __init__(self):
+        staffAmount = 0 #员工数量
+        sraffWages = 0 #员工工资（0-30000€）
+        staffAbility_converse = 0 #员工交谈能力（0-200）
+        staffAbility_speed = 0 #员工速度（0-200）
+        staffAbility_promote = 0 #推销能力（0-200）
+        staffProductivity = 0 #员工效率（0-300%）
         pass
 
     def staffBehavior():
