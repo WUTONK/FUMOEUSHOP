@@ -101,9 +101,6 @@ class mainclass(object):
                         break    
             #第二删除模式（修改某行的fumo数量）
             if fumosave_type == 3:
-                with open("./myfumolist", "r") as fumosave_file:
-                    print("打开了第二删除模式")
-                    string = str(fumoname)
                     
                     # 开始查找fumoname行
                     for fumos in WarehouseFumoList:
@@ -127,7 +124,12 @@ class mainclass(object):
                     
 
                     #写入 
-                    Warehouselist = list(pandas.DataFrame(WarehouselistScv))
+                    Warehouselist = WarehouselistScv.to_dict()#转列表
+                    print(Warehouselist)
+                    Warehouselist['quantity'][index] = fumoQuantityNums
+                    print(Warehouselist)
+                    Warehouselist = pandas.DataFrame(Warehouselist)
+                    Warehouselist.to_csv(WarehouselistScvFlie,index=False)
                     print(Warehouselist)
 
         #普通存档功能
@@ -253,12 +255,17 @@ class fumoshop(object):
 class player(object):
     pass
 
-class reads(object):
-
+class FileReads(object):
+    """
+    读取文件的统一类
+    """
     def __init__(self):
        pass
 
 class staff(object):
+    """
+    员工类
+    """
     def __init__(self):
         pass
 
