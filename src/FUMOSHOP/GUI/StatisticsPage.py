@@ -2,8 +2,6 @@
 统计数据页面
 """
 
-from msilib.schema import Class
-
 
 class StatisticsPage_money:
     """

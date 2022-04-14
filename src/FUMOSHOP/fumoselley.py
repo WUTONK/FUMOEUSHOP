@@ -1,12 +1,7 @@
-import os
-from posixpath import split
-import re
-import linecache
-import json
-import shutil
-from unicodedata import name
-import pandas
-from pyparsing import withClass
+import sys
+sys.path.append('./FUMOEUSHOP')#添加加载路径，不然找不到包
+from OHCIRNO import os,re,linecache,json,shutil,pandas
+import OHCIRNO
 
 """
 
@@ -18,8 +13,8 @@ from pyparsing import withClass
 //                                      版本：alpha v.0.0.0                                                                         
 //                                      开发者：WUTONK                                                                            
 //                                      开始日期：2021-12-13   
-//                                      最后编辑日期：2021-2-5
-//                                      本页面功能：主页以及游戏逻辑运行                                                                              
+//                                      最后编辑日期：2021-4-12
+//                                      本页面功能：卖家核心逻辑处理                                                                            
 //                                                                                                                                                                                                           
 //                                                      ┌      ┐ 
 //												          ' 」'      welcome to the code                                                 
@@ -45,7 +40,7 @@ class mainclass(object):
     def swithviews(self):
 
         print("正在初始化...调试信息：")
-        fumoshop.shopinit() # 初始化
+        fumoshop.init() # 初始化
         print("正常")
         while True:
             swithView = str(input("要进入的页面："))
@@ -63,10 +58,10 @@ class mainclass(object):
             print("_______________页面02（fumoWarehouse）,调试信息：")
 
             #读取csv文件
-            WarehouselistScvFlie = './myfumolist_csv.csv'
+            WarehouselistScvFlie = './list/myfumolist_csv.csv'
             WarehouselistScv = pandas.read_csv(WarehouselistScvFlie)
-            WarehouseFumoList = list(WarehouselistScv.iloc[:, 0]) #读取位于name行的数据
-            WarehouseFumonumList = list(WarehouselistScv.iloc[:, 1])
+            WarehouseFumoList = list(WarehouselistScv.iloc[:, 0]) #读取位于name行的所有数据
+            WarehouseFumonumList = list(WarehouselistScv.iloc[:, 1]) #读取位于num行的所有数据
 
             print("文件读取完毕")
             print(WarehouselistScv)
@@ -190,37 +185,20 @@ class fumoshop(object):
         ShopStars = 1 #商店星级
         renown = 10 #知名度
 
+
+    def filesinit():
+        fumo_namelist = None
+        fumoNumNamelist = None
+        module_path = None
+        filename = None
+        fumoCsvFlie = None
+        fumoShopCsv = None
     #商店初始化变量
-    def shopinit():
-
-        #设定全局变量
-        global fumo_namelist
-        global fumo_moneylist
-        global fumoNumNamelist
-
-        #打开fumo在售列表
+    
+    def init():
+        fumo_namelist,fumoNumNamelist,module_path,filename,fumoCsvFlie,fumoShopCsv\
+        = OHCIRNO.shops.shopinit()#从OHCIRON加载初始化
         
-        fumoShopCsv = pandas.read_csv('./fumoshoplist_csv.csv')
-        fumo_namelist = list(fumoShopCsv.iloc[:, 0]) #取第一列的转为fumonamelist
-        fumo_moneylist = list(fumoShopCsv.iloc[:, 1])
-
-        #计算全局变量
-        fumoNumNamelist = []#初始化
-        b = 0
-        a = len(fumo_namelist)
-        while b!=a:
-            fumoNumNamelist.append(str(b)+"."+fumo_namelist[b]+"("+str(fumo_moneylist[b])+")")#将索引值加上符号，名称
-            list(fumoNumNamelist)
-            b = b+1
-
-        #调试信息显示
-        print(fumoNumNamelist)
-        print("_________________页面01（shopinit）,调试信息：")
-        print(fumoShopCsv,fumo_moneylist,fumo_namelist)
-        print("_________________初始化结束_________________")
-
-        return #将计算出的变量返回
-
 
     def findfumo(self,fumoName):
         for fumos in fumo_namelist:

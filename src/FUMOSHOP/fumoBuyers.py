@@ -2,6 +2,8 @@ import re
 import time
 import random
 import json
+import sys
+print(sys.path)
 
 def main():
     pass
