@@ -7,7 +7,7 @@ import os
 
 print(os.name)
 print("111")
-class sys_config():
+class sys_Detection():
     def sys_testing():
         if platform.system().lower() == 'windows':
             return 'windows'
