@@ -14,6 +14,7 @@ class ShoppingBehavior():
         pass
 
     def RandomPurchase():
+        
         """
         负责顾客的随机购买行为
         """
