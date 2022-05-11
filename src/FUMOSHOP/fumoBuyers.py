@@ -53,6 +53,10 @@ class ShoppingBehavior():
         """
 
         pass
-
+class randoms():
+    """
+    负责随机生成功能
+    """
+    pass
 if __name__ == "__main__":
     main()

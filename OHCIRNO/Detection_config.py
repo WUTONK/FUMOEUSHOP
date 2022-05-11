@@ -5,8 +5,6 @@ import platform
 import sys
 import os
 
-print(os.name)
-print("111")
 class sys_Detection():
     def sys_testing():
         if platform.system().lower() == 'windows':
@@ -14,7 +12,13 @@ class sys_Detection():
         elif platform.system().lower() == 'linux':
             return 'linux'
         elif platform.system().lower() == 'darwin':
-            return 'macos'
+            return 'macos' 
+    def Detection_64():
+        if:
+            return True
+        else:
+            return False
+
 
         
             

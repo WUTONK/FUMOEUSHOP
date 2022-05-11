@@ -48,17 +48,16 @@ class fumoshop(object):
 
     def shopinit():
 
+        #声明全局变量
         global fumo_namelist,fumoNumNamelist,\
         module_path,filename,fumoCsvFlie,fumoShopCsv
 
         fumo_namelist,fumoNumNamelist,module_path,filename,fumoCsvFlie,fumoShopCsv\
-        = OHCIRNO.shops.shopinit()#从OHCIRON加载初始化
+        = OHCIRNO.shops.shopinit()#从OHCIRON加载初始化变量
 
 
     def findfumo(self,fumoName):
         
-       
-
         for fumos in fumo_namelist:
             if fumoName == fumo_namelist:
                 # 获得对应fumo在列表中的索引
