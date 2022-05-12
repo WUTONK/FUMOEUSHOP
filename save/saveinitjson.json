@@ -1,0 +1,39 @@
+{
+
+    "save":
+    {
+
+        "gamesetting":
+        {
+        
+        "lang":"zh_cn"
+        
+
+
+        },
+
+
+        "BasicProperties":
+        {
+        "playername":"cirno",
+        "money":100
+
+
+        },
+
+
+        "customerProperties":
+        {
+        },
+
+        
+        "GUIProperties":
+        {
+        }
+
+    }
+    
+
+   
+
+}

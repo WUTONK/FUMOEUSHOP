@@ -33,17 +33,15 @@ class time_get(object):
         for i in range(get_time_):
             if get_time_[i] != None:
                 return_time += str(get_time_[i])+':'
-
-        return return_time.strip(':')
         
+        return return_time.strip(':')#将结尾的':'去除
+        
+class time_save_read(object):
 
-
-    
     def time_save_read():
         """
         存取时间
-        """
-    
+        """    
 
 class Statistical(object):
 

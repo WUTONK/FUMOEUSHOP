@@ -18,6 +18,8 @@ PLAYERNAME = "WUTONK"
 
 import platform
 
+from FUMOSHOP.fumoselley import fumoshop
+
 #基本设置
 HOST = '127.0.0.1' #网络功能预留ip
 PORT = 8080 #网络功能预留端口
@@ -36,4 +38,5 @@ MONEY = 500
 SHOP_STARS = 1 #商店星级
 RENOWN = 1 #知名度
 
-#
+#存档位置
+SAVE_FILE = '/src/FUMOSHOP/playersaves'
