@@ -57,6 +57,8 @@ class randoms():
     """
     负责随机生成功能
     """
-    pass
+    def __init__(self) :
+        pass
+    
 if __name__ == "__main__":
     main()

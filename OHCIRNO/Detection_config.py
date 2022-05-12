@@ -14,8 +14,13 @@ class sys_Detection():
         elif platform.system().lower() == 'darwin':
             return 'macos' 
     def Detection_64():
-        if:
-            return True
+        """
+        检测系统是否为64位
+        """
+        maxbit = sys.maxsize
+
+        if maxbit>2**32:
+            return True #为64位系统
         else:
             return False
 

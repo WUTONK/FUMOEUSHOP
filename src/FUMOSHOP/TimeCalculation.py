@@ -16,15 +16,25 @@ class time_get(object):
         """
         获取系统时间，返回yy,mm,dd,hh,ss
         """
-        pass
-    
-    def get_time_ (get_time,yyBool,mmBool,ddBool,hhBool,ssBool):
+        t = time.localtime()
+        time_local = [t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec]
+        return time_local
+
+    def get_time_格式化 ():
         """
         时间格式化
         """
+        return_time = ''
 
-        yy,mm,dd,hh,ss = time_get.get_system_time()
-        
+        time_local = time_get.get_system_time()
+
+        get_time_ = [time_local]
+
+        for i in range(get_time_):
+            if get_time_[i] != None:
+                return_time += str(get_time_[i])+':'
+
+        return return_time.strip(':')
         
 
 
