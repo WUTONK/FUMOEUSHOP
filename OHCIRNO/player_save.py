@@ -12,16 +12,7 @@ import pandas
 
 import OHCIRNO
 
-#入口
-
-
-def main():
-    maincls = mainclass()
-    shop = fumoshop()
-    maincls.swithviews()
-
 #负责主控功能
-
 
 class mainclass(object):
 
@@ -52,17 +43,23 @@ class saves():
         pass
 
     #fumo仓库函数，负责存储fumo列表和添加删除功能
-    def save_csv_fumo_selley(fumosave_type, fumoname, fumo_num, WarehouselistScvFlie):
+    class save_csv_fumo_selley(fumosave_type, fumoname, fumo_num, Warehouse_Scv_Flie):
 
         print("_______________（save_csv）,调试信息：")
 
         #读取csv文件
-        WarehouselistScv = pandas.read_csv(WarehouselistScvFlie)
-        csv_FumoList = list(WarehouselistScv.iloc[:, 0])  # 读取位于name行的所有数据
+        csv_warehouse = pandas.read_csv(Warehouse_Scv_Flie)
+        csv_FumoList = list(csv_warehouse.iloc[:, 0])  # 读取位于name行的所有数据
         WarehouseFumonumList = list(
-            WarehouselistScv.iloc[:, 1])  # 读取位于num行的所有数据
-
-        if fumosave_type == 'find_index':
+            csv_warehouse.iloc[:, 1])  # 读取位于num行的所有数据
+        
+        def backups(Warehouse_Scv_Flie):
+            """
+            备份csv
+            """
+            pass
+        
+        def find_index(csv_FumoList,fumoname):
             """
             寻找索引
             """
@@ -75,16 +72,16 @@ class saves():
                 else:
                     return None
 
-        if fumosave_type == 'add':
+        def fumosave_type(Warehouse_Scv_Flie,fumoname):
             """
             以追加模式写入
             """
             data = {'name': [fumoname], 'quantity': [fumo_num]}
             data_1 = pandas.DataFrame(data)
-            data_1.to_csv(WarehouselistScvFlie, mode='a',
+            data_1.to_csv(Warehouse_Scv_Flie, mode='a',
                             index=False, header=False)  # 以追加模式写入
 
-        if fumosave_type == 'del':
+        def fumosave_type (csv_FumoList,csv_warehouse,Warehouse_Scv_Flie,fumoname):
             """
             删除模式（清空仓库中的某个fumo的所有存货）
             """
@@ -92,13 +89,13 @@ class saves():
                 if fumos == fumoname:
                     # 获得对应fumo在列表中的索引
                     del_index = csv_FumoList.index(fumoname)
-                    csv_del = WarehouselistScv.drop(
+                    csv_del = csv_warehouse.drop(
                         del_index)  # 把指定行删除
                     print(csv_del)
                     csv_del.to_csv(
-                        WarehouselistScvFlie, index=False, encoding="utf-8")  # 删除后保存
+                        Warehouse_Scv_Flie, index=False, encoding="utf-8")  # 删除后保存
 
-        if fumosave_type == 3:
+        def fumosave_type (csv_FumoList,csv_warehouse,Warehouse_Scv_Flie,fumoname):
             """
             修改模式（修改某行的fumo数量
             """
@@ -109,64 +106,65 @@ class saves():
                     index = csv_FumoList.index(fumoname)
                 else:
                     return None #找不到索引
-        
-            fumoQuantityNums = list(WarehouselistScv.iloc[index:, 1])[0]
-            print(fumoQuantityNums)
-
+    
+            fumo_Quantity_Nums = list(csv_warehouse.iloc[index:, 1])[0]
+            print(fumo_Quantity_Nums)
             #开始计算，然后转字符串写入
             fumo_num = int(fumo_num)
 
-            print(fumo_num, fumoQuantityNums)
+            print(fumo_num, fumo_Quantity_Nums)
             if fumo_num >= 0:
-                fumoQuantityNums = (fumoQuantityNums+fumo_num)  # fumo_num即为外部传入的fumo数量
+                fumo_Quantity_Nums = (fumo_Quantity_Nums+fumo_num)  # fumo_num即为外部传入的fumo数量
             elif fumo_num < 0:
-                fumoQuantityNums = (fumoQuantityNums-fumo_num) 
+                fumo_Quantity_Nums = (fumo_Quantity_Nums-fumo_num) 
             else:
                 print("fumo_nums全局变量错误，值为：", fumo_num)
 
-
             #写入
-            Warehouselist = WarehouselistScv.to_dict()  # 转字典
-            Warehouselist['quantity'][index] = fumoQuantityNums  # 覆盖数量
-            print("数量已经修改：", Warehouselist)
+            Warehouselist = csv_warehouse.to_dict()  # 转字典
+            Warehouselist['quantity'][index] = fumo_Quantity_Nums  # 覆盖数量
             Warehouselist = pandas.DataFrame(Warehouselist)  # 转dataFrame类型
-            Warehouselist.to_csv(WarehouselistScvFlie, index=False) #以无索引模式写入
+            Warehouselist.to_csv(Warehouse_Scv_Flie, index=False) #以无索引模式写入
 
-    #普通存档功能
-    def playersave_1(saveFile):
-        print("正在存储位于：", saveFile,"的存档")
-        pass
+    class player_save():
 
-    #存档备份功能
-    def playersave_2(saveFile):
+        #普通存档功能
+        def save_normal(saveFile):
+            print("正在存储位于：", saveFile,"的存档")
+            pass
 
-        newFilenName = saveFile+"_copy"
-        os.mkdir(newFilenName)
-        shutil.copyfile(saveFile, newFilenName)
-        "{}{}{}".format(saveFile, "已经复制到",newFilenName)
+        #存档备份功能
+        def save_backup(saveFile):
 
-    #存档删除功能
-    def playersave_3(removeSaveName):
-        os.remove(removeSaveName)
-        "{}{}{}".format("存档", removeSaveName,"已删除！")
+            newFilenName = saveFile+"_copy"
+            os.mkdir(newFilenName)
+            shutil.copyfile(saveFile, newFilenName)
+            "{}{}{}".format(saveFile, "已经复制到",newFilenName)
 
-    #新建存档功能
-    def playersave_4(money, shopStars,reown):
+        #存档删除功能
+        def save_del(removeSaveName):
+            os.remove(removeSaveName)
+            "{}{}{}".format("存档", removeSaveName,"已删除！")
 
-        fileExistence = True
-        #循环查找文件名是否存在（被占用）
-        for savenum in range(101):
-            fileExistence = os.path.exists("./playsaves/save_" + str(savenum))
-            if fileExistence == False:
-                newFilenName = "./playsaves/save_" + str(savenum+1) 
-                break
-        #有空位，新建存档文件夹
+        #新建存档功能
+        def save_new(money, shopStars,reown):
 
+            fileExistence = True
+            #循环查找文件名是否存在（被占用）
+            for savenum in range(101):
+                fileExistence = os.path.exists("./playsaves/save_" + str(savenum))
+                if fileExistence == False:
+                    newFilenName = "./playsaves/save_" + str(savenum+1) 
+                    break
+            #有空位，新建存档文件夹
 
-    #存档调试功能（开发者用）
-    def playersave_5(money, shopStars,reown):
-        pass
+        #存档调试功能（开发者用）
+        def save_root(money, shopStars,reown):
+            pass
 
-    #存档损坏处理
-    def playersave_6():
+        #存档损坏处理
+        def save_damage():
+            pass
+    
+    class save_package():
         pass
