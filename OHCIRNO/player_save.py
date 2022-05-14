@@ -23,7 +23,7 @@ class mainclass(object):
     def swithviews(self):
 
         print("正在初始化...调试信息：")
-        fumoshop.init()  # 初始化
+        OHCIRNO.shop()  # 初始化
         print("正常")
         while True:
             swithView = str(input("要进入的页面："))

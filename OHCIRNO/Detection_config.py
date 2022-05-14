@@ -6,6 +6,13 @@ import sys
 import os
 
 class sys_Detection():
+
+    def Detection_all(self):
+        sys_name = self.sys_testing()
+        bool_64 = self.detection_64()
+
+        return sys_name,bool_64
+
     def sys_testing():
         if platform.system().lower() == 'windows':
             return 'windows'
@@ -13,7 +20,7 @@ class sys_Detection():
             return 'linux'
         elif platform.system().lower() == 'darwin':
             return 'macos' 
-    def Detection_64():
+    def detection_64():
         """
         检测系统是否为64位
         """
@@ -23,6 +30,9 @@ class sys_Detection():
             return True #为64位系统
         else:
             return False
+
+    
+    
 
 
         

@@ -5,20 +5,14 @@
 
 例如:
 
-```python
 from OHCIRNO.default_config import *
 
 HOST = '0.0.0.0'
 PORT = 8080
 ROOTMODE = Ture
 PLAYERNAME = "WUTONK"
-```
 
 """
-
-import platform
-
-from FUMOSHOP.fumoselley import fumoshop
 
 #基本设置
 HOST = '127.0.0.1' #网络功能预留ip
@@ -40,3 +34,7 @@ RENOWN = 1 #知名度
 
 #存档位置
 SAVE_FILE = '/src/FUMOSHOP/playersaves'
+CSV_FUMO_LIST_NAME = '/fumo_list.csv'
+CSV_CONFIG = '/config_save.csv'
+
+#
