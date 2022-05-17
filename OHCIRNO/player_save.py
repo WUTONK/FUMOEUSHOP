@@ -11,6 +11,7 @@ import shutil
 import pandas
 
 import OHCIRNO
+from OHCIRNO import shops
 
 #负责主控功能
 
@@ -23,7 +24,7 @@ class mainclass(object):
     def swithviews(self):
 
         print("正在初始化...调试信息：")
-        OHCIRNO.shop()  # 初始化
+        OHCIRNO.shops  # 初始化
         print("正常")
         while True:
             swithView = str(input("要进入的页面："))
@@ -31,7 +32,7 @@ class mainclass(object):
             if swithView == '1':
                 fumoshop.shopinit()
             if swithView == '2':
-                fumoWarehouse(fumosave_type=3, fumoname="流汗黄豆", fumo_num=90)
+                saves.save_csv_fumo_selley(fumosave_type=3, fumoname="流汗黄豆", fumo_num=90)
 
 
 class saves():
@@ -43,17 +44,15 @@ class saves():
         pass
 
     #fumo仓库函数，负责存储fumo列表和添加删除功能
-    class save_csv_fumo_selley(fumosave_type, fumoname, fumo_num, Warehouse_Scv_Flie):
-
-        print("_______________（save_csv）,调试信息：")
+    class save_csv_fumo_selley(fumosave_type, fumoname, fumo_num, Scv_Flie):
 
         #读取csv文件
-        csv_warehouse = pandas.read_csv(Warehouse_Scv_Flie)
+        csv_warehouse = pandas.read_csv(Scv_Flie)
         csv_FumoList = list(csv_warehouse.iloc[:, 0])  # 读取位于name行的所有数据
         WarehouseFumonumList = list(
             csv_warehouse.iloc[:, 1])  # 读取位于num行的所有数据
         
-        def backups(Warehouse_Scv_Flie):
+        def backups(Scv_Flie):
             """
             备份csv
             """
@@ -72,16 +71,16 @@ class saves():
                 else:
                     return None
 
-        def fumosave_type(Warehouse_Scv_Flie,fumoname):
+        def fumosave_type(Scv_Flie,fumoname):
             """
             以追加模式写入
             """
             data = {'name': [fumoname], 'quantity': [fumo_num]}
             data_1 = pandas.DataFrame(data)
-            data_1.to_csv(Warehouse_Scv_Flie, mode='a',
+            data_1.to_csv(Scv_Flie, mode='a',
                             index=False, header=False)  # 以追加模式写入
 
-        def fumosave_type (csv_FumoList,csv_warehouse,Warehouse_Scv_Flie,fumoname):
+        def fumosave_type (csv_FumoList,csv_warehouse,Scv_Flie,fumoname):
             """
             删除模式（清空仓库中的某个fumo的所有存货）
             """
@@ -93,9 +92,9 @@ class saves():
                         del_index)  # 把指定行删除
                     print(csv_del)
                     csv_del.to_csv(
-                        Warehouse_Scv_Flie, index=False, encoding="utf-8")  # 删除后保存
+                        Scv_Flie, index=False, encoding="utf-8")  # 删除后保存
 
-        def fumosave_type (csv_FumoList,csv_warehouse,Warehouse_Scv_Flie,fumoname):
+        def fumosave_type (csv_FumoList,csv_warehouse,Scv_Flie,fumoname):
             """
             修改模式（修改某行的fumo数量
             """
@@ -124,7 +123,7 @@ class saves():
             Warehouselist = csv_warehouse.to_dict()  # 转字典
             Warehouselist['quantity'][index] = fumo_Quantity_Nums  # 覆盖数量
             Warehouselist = pandas.DataFrame(Warehouselist)  # 转dataFrame类型
-            Warehouselist.to_csv(Warehouse_Scv_Flie, index=False) #以无索引模式写入
+            Warehouselist.to_csv(Scv_Flie, index=False) #以无索引模式写入
 
     class player_save():
 

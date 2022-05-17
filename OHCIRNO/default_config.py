@@ -35,6 +35,6 @@ RENOWN = 1 #知名度
 #存档位置
 SAVE_FILE = '/src/FUMOSHOP/playersaves'
 CSV_FUMO_LIST_NAME = '/fumo_list.csv'
-CSV_CONFIG = '/config_save.csv'
+CSV_FILE = '/config_save.csv'
+LOG_FILE = '/log.txt'
 
-#

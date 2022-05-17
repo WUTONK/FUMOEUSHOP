@@ -3,3 +3,6 @@
 """
 
 import random
+
+class buy_randon():
+    pass

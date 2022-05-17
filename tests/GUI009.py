@@ -24,9 +24,9 @@ class Example(QMainWindow):
 
     def initUI(self):
 
-        self.statusBar().showFullScreen()
-        
-        self.setGeometry(300, 700, 350, 250)
+        self.statusBar().showMessage('Ready')
+
+        self.setGeometry(300, 300, 350, 250)
         self.setWindowTitle('Statusbar')
         self.show()
 
