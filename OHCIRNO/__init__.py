@@ -13,15 +13,6 @@ import webbrowser
 print("")
 sys.path.append('')
 
-if platform.system().lower() == 'windows':
-    print("windows")
-elif platform.system().lower() == 'linux':
-    print("linux")
-elif platform.system().lower() == 'macos':
-    print("linux")
-
-
-
 __version__ = (0, 0, 1)
 
 from SHOP import shops as shops

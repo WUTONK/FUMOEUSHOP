@@ -7,7 +7,7 @@ import sys
 
 logger: logging.Logger = logging.getLogger('FUMOSHOP')
 """
-NoneBot 全局的 logger。
+全局的 logger。
 
 用法:
     ```python
