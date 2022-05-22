@@ -1,5 +1,5 @@
 """
-菜单页面及菜单栏页面
+进入游戏后页面及菜单栏页面
 """
 
 import re
@@ -9,25 +9,35 @@ import PyQt6
 def main():
     pass
 
+
 class uppermenuBar:
-    def Avatar():
+    class Avatar():
         """
         负责玩家属性，例如头像
         """
-        
 
         pass
 
-    def NameColumn():
+    class NameColumn():
         """
         玩家姓名栏
         """
 
         pass
 
-    def moneyColumn():
+    class moneyColumn():
         """金钱栏"""
-        pass
+        def change_Column():
+            """
+            修改金钱栏
+            """
+            pass
+
+        def set_color():
+            """
+            设置颜色
+            """
+            pass
 
 class UpperMenuBar__Groove:
     """
