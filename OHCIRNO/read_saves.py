@@ -11,4 +11,6 @@ class file_define():
         
 
 class csv_read():
+
+    def read_
     pass

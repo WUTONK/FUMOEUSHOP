@@ -7,6 +7,10 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (QWidget, QLCDNumber, QSlider,QVBoxLayout, QApplication)
 
 
+class GUI():
+
+    def initUI():
+        pass
 
 class web_link():
 

@@ -13,6 +13,9 @@ ROOTMODE = Ture
 PLAYERNAME = "WUTONK"
 
 """
+import sys
+sys.path.append("FUMOEUSHOP") 
+print (sys.path)
 
 #基本设置
 HOST = '127.0.0.1' #网络功能预留ip
@@ -33,8 +36,17 @@ SHOP_STARS = 1 #商店星级
 RENOWN = 1 #知名度
 
 #存档位置
-SAVE_FILE = '/src/FUMOSHOP/playersaves'
+SAVE_FILE = '/save/save_01/'
 CSV_FUMO_LIST_NAME = '/fumo_list.csv'
 CSV_FILE = '/config_save.csv'
 LOG_FILE = '/log.txt'
+
+PUBLIC_FILE = 'src/public/' #公共资源库
+MEDIA_FILE =  'src/public/media/' #多媒体资源库
+MOVIE_FILE = '/movie'
+MUSIC_FILE = '/music'
+IMG_FILE = '/img'
+
+#全局根目录
+
 

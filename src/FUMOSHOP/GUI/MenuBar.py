@@ -26,3 +26,6 @@ class next_time_button():
 
 class setting_button():
     pass
+
+class music():
+    pass

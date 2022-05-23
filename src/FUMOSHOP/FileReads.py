@@ -6,5 +6,9 @@ class FileReads(object):
     """
     读取文件的统一类
     """
+    
     def __init__(self):
        pass
+
+    class read_csv():
+        pass

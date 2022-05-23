@@ -112,25 +112,25 @@ class staff(object):
         staffProductivity = 0 #员工效率（0-300%）
         pass
 
-    def staffBehavior():
+    class staffBehavior():
         """
         员工行为：效率，星级，满意度管理
         """
         pass
 
-    def personnel():
+    class personnel():
         """
         人事管理
         """
         pass
 
-    def wages():
+    class wages():
         """
         员工薪酬处理
         """
         pass
 
-    def AutoSales():
+    class AutoSales():
         """
         员工自动销售处理
         """

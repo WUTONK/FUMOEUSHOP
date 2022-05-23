@@ -9,6 +9,10 @@ import PyQt6
 def main():
     pass
 
+class GUI():
+
+    def initUI():
+        pass
 
 class uppermenuBar:
     class Avatar():
