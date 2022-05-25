@@ -8,7 +8,7 @@ object.
 
 Author: Jan Bodnar
 Website: zetcode.com
-"""
+
 
 import sys
 from PyQt6.QtWidgets import QMainWindow, QPushButton, QApplication
@@ -57,3 +57,14 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+ABSPATH=None
+"""
+
+import os
+import sys
+
+ABSPATH=os.path.abspath('../'+(sys.argv[0]))
+ABSPATH=os.path.dirname(ABSPATH)
+
+print(ABSPATH)

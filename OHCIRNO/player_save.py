@@ -128,7 +128,7 @@ class saves():
     class player_save():
 
         #普通存档功能
-        def save_normal(saveFile):
+        class save_normal(saveFile):
             print("正在存储位于：", saveFile,"的存档")
             pass
 
@@ -141,20 +141,16 @@ class saves():
             "{}{}{}".format(saveFile, "已经复制到",newFilenName)
 
         #存档删除功能
-        def save_del(removeSaveName):
-            os.remove(removeSaveName)
-            "{}{}{}".format("存档", removeSaveName,"已删除！")
+        class save_del(remove_Save_file):
+            os.remove(remove_Save_file)
+            "{}{}{}".format("存档", remove_Save_file ,"已删除！")
 
         #新建存档功能
         def save_new(money, shopStars,reown):
 
             fileExistence = True
             #循环查找文件名是否存在（被占用）
-            for savenum in range(101):
-                fileExistence = os.path.exists("./playsaves/save_" + str(savenum))
-                if fileExistence == False:
-                    newFilenName = "./playsaves/save_" + str(savenum+1) 
-                    break
+            
             #有空位，新建存档文件夹
 
         #存档调试功能（开发者用）

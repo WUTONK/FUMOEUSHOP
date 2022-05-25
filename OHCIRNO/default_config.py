@@ -14,8 +14,7 @@ PLAYERNAME = "WUTONK"
 
 """
 import sys
-sys.path.append("FUMOEUSHOP") 
-print (sys.path)
+import os
 
 #基本设置
 HOST = '127.0.0.1' #网络功能预留ip
@@ -25,15 +24,13 @@ ROOTMODE = True #ROOT模式
 TESEMODE = True #测试模式
 SYSOS = 'MACOS' #运行系统
 
-# GUI属性
-GUI_SIZE = 100*100 #界面尺寸
-AVATAR = "" #预留头像地址
-TRANSITION_ANIMATION = True #过渡动画
+"""
+路径设置
+"""
 
-#玩家初始属性
-MONEY = 500
-SHOP_STARS = 1 #商店星级
-RENOWN = 1 #知名度
+#全局根目录
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_PATH = os.path.join(ROOT_DIR, 'configuration.conf')
 
 #存档位置
 SAVE_FILE = '/save/save_01/'
@@ -47,6 +44,21 @@ MOVIE_FILE = '/movie'
 MUSIC_FILE = '/music'
 IMG_FILE = '/img'
 
-#全局根目录
+
+"""
+属性设置
+"""
+# GUI属性
+GUI_SIZE = 100*100 #界面尺寸
+AVATAR = "" #预留头像地址
+TRANSITION_ANIMATION = True #过渡动画
+
+#玩家初始属性
+MONEY = 500
+SHOP_STARS = 1 #商店星级
+RENOWN = 1 #知名度
+
+
+
 
 
