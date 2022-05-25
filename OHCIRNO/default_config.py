@@ -30,11 +30,12 @@ SYSOS = 'MACOS' #运行系统
 
 #全局根目录
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-CONFIG_PATH = os.path.join(ROOT_DIR, 'configuration.conf')
+CONFIG_PATH = os.path.dirname(os.path.abspath('config.py'))
+SAVE_PATH = os.path.dirname(os.path.abspath('save'))
 
 #存档位置
-SAVE_FILE = '/save/save_01/'
-CSV_FUMO_LIST_NAME = '/fumo_list.csv'
+SAVE_FILE = '/save_01/'
+CSV_FUMO_NAME_LIST = '/fumo_list.csv'
 CSV_FILE = '/config_save.csv'
 LOG_FILE = '/log.txt'
 

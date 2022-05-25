@@ -12,5 +12,6 @@ class file_define():
 
 class csv_read():
 
-    def read_():
+    class read_fumo_list_name_csv():
         pass
+    class read_

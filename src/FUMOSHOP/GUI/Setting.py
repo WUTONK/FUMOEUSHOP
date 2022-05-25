@@ -4,7 +4,6 @@
 
 import re
 import json
-import PyQt6
 
 class init():
     pass

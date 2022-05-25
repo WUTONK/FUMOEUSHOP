@@ -2,4 +2,8 @@
 商店fumo列表生成
 """
 
-class 
+class init():
+    pass
+
+class get_img():
+    pass

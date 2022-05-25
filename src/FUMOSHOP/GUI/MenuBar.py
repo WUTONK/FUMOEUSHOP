@@ -2,11 +2,6 @@
 进入菜单页面
 """
 
-
-import re
-import json
-import PyQt6
-
 class init():
     pass
 
